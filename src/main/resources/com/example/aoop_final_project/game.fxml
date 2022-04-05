@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fx:id="head" fill="DODGERBLUE" layoutX="198.0" layoutY="101.0" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="stringLabel" layoutX="14.0" layoutY="496.0" prefHeight="222.0" prefWidth="949.0" text="____ ____ __ __ ____ _____ __ __ __ _____ _______ ___ __ __ __" wrapText="true">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="warningLabel" layoutX="14.0" layoutY="442.0" prefHeight="54.0" prefWidth="367.0" text="ABCDEFGHIJKLMNOPQRSTUVWXYZ" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Line fx:id="body" endX="-100.0" endY="157.0" layoutX="298.0" layoutY="145.0" startX="-100.0" />
+      <Line fx:id="armLeft" endX="-15.0" endY="-28.0" layoutX="212.0" layoutY="198.0" startX="-100.0" />
+      <Line fx:id="armRight" endX="100.0" layoutX="99.0" layoutY="166.0" startX="148.0" startY="56.0" />
+      <Line fx:id="legLeft" endX="100.0" layoutX="100.0" layoutY="303.0" startX="55.0" startY="57.0" />
+      <Line fx:id="legRight" endX="-60.0" endY="48.0" layoutX="298.0" layoutY="303.0" startX="-100.0" />
+      <Label layoutX="310.0" layoutY="452.0" text="Enter Guess (must be a single letter): ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="guessTextField" layoutX="703.0" layoutY="457.0" promptText="Enter guess" />
+      <Label alignment="CENTER_RIGHT" layoutX="842.0" layoutY="14.0" prefHeight="27.0" prefWidth="116.0" text="Score: 69" textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
