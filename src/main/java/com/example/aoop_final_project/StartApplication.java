@@ -18,8 +18,6 @@ public class StartApplication extends Application {
         stage.show();
     }
 
-    //Change this
-
     public static void main(String[] args) {
         launch();
     }
