@@ -25,7 +25,7 @@
          <font>
             <Font name="MS Gothic" size="18.0" />
          </font></Label>
-      <Button mnemonicParsing="false" text="Log In" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" onAction="#switchToMenu" text="Log In" GridPane.rowIndex="3" />
       <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="198.0" text="Username  " textAlignment="RIGHT" GridPane.rowIndex="1" />
       <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="207.0" text="Password  " GridPane.rowIndex="2" />
       <PasswordField fx:id="passwordPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
