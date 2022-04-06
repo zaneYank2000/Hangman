@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.GameController">
    <children>
       <Circle fx:id="head" fill="DODGERBLUE" layoutX="404.0" layoutY="142.0" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="stringLabel" layoutX="14.0" layoutY="496.0" prefHeight="222.0" prefWidth="949.0" text="____ ____ __ __ ____ _____ __ __ __ _____ _______ ___ __ __ __" wrapText="true">
@@ -65,10 +65,11 @@
       <Line endY="68.5" layoutX="595.0" layoutY="354.0" startY="-314.3999938964844" />
       <Line endX="100.0" layoutX="495.0" layoutY="39.0" startX="-89.79998779296875" startY="-1.9073486328125E-6" />
       <Line endX="-1.0" endY="25.00000762939453" layoutX="405.0" layoutY="74.0" startX="-0.507080078125" startY="-34.29289245605469" />
-      <Button alignment="CENTER" layoutY="692.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="40.0" prefWidth="93.0" style="-fx-background-color: RED;" text="EXIT">
+      <Button alignment="CENTER" layoutY="692.0" mnemonicParsing="false" onAction="#exitButtonClicked" prefHeight="40.0" prefWidth="93.0" style="-fx-background-color: RED;" text="EXIT">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Label fx:id="gameID" layoutX="906.0" layoutY="703.0" text="Game ID: " />
    </children>
 </AnchorPane>
