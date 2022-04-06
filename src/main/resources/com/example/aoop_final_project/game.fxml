@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
@@ -12,7 +13,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.GameController">
    <children>
       <Circle fx:id="head" fill="DODGERBLUE" layoutX="404.0" layoutY="142.0" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="stringLabel" layoutX="14.0" layoutY="496.0" prefHeight="222.0" prefWidth="949.0" text="____ ____ __ __ ____ _____ __ __ __ _____ _______ ___ __ __ __" wrapText="true">
+      <Label fx:id="stringLabel" alignment="CENTER" layoutX="14.0" layoutY="496.0" prefHeight="222.0" prefWidth="949.0" text="____ ____ __ __ ____ _____ __ __ __ _____ _______ ___ __ __ __" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>
@@ -27,12 +28,6 @@
       <Line fx:id="armRight" endX="100.0" layoutX="305.0" layoutY="207.0" startX="148.0" startY="56.0" visible="false" />
       <Line fx:id="legLeft" endX="100.0" layoutX="306.0" layoutY="344.0" startX="55.0" startY="57.0" visible="false" />
       <Line fx:id="legRight" endX="-60.0" endY="48.0" layoutX="504.0" layoutY="344.0" startX="-100.0" visible="false" />
-      <Label layoutX="182.0" layoutY="506.0" text="Enter Guess (must be a single letter): ">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="guessTextField" layoutX="575.0" layoutY="511.0" promptText="Enter guess" />
       <VBox layoutY="3.0" prefHeight="58.0" prefWidth="100.0">
          <children>
             <Label fx:id="username1" alignment="CENTER" prefHeight="27.0" prefWidth="116.0" text="Username1" textAlignment="RIGHT">
@@ -71,5 +66,16 @@
          </font>
       </Button>
       <Label fx:id="gameID" layoutX="906.0" layoutY="703.0" text="Game ID: " />
+      <HBox alignment="CENTER" layoutX="105.0" layoutY="468.0" prefHeight="100.0" prefWidth="697.0" spacing="20.0">
+         <children>
+            <Label text="Enter Letter: ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="guessTextField" />
+            <Button mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
