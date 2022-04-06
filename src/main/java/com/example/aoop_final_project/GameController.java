@@ -58,6 +58,17 @@ public class GameController {
     @FXML
     private Label warningLabel;
 
+    /* TRYING TO ADD REGEX
+    @FXML
+    public void initialize() {
+        guessTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("^[A-Za-z]$")) {
+                guessTextField.setText(newValue.replaceAll("[^[A-Za-z]$]", ""));
+            }
+        });
+    }
+     */
+
     @FXML
     void exitButtonClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
@@ -67,4 +78,10 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    void submitButtonClicked(ActionEvent event) {
+        System.out.println("Submit clicked");
+    }
+
 }
