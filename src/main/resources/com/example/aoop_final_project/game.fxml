@@ -17,16 +17,16 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="warningLabel" alignment="CENTER" layoutX="263.0" layoutY="441.0" prefHeight="54.0" prefWidth="367.0" text="ABCDEFGHIJKLMNOPQRSTUVWXYZ" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="warningLabel" alignment="CENTER" layoutX="263.0" layoutY="441.0" prefHeight="54.0" prefWidth="367.0" text="A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Line fx:id="body" endX="-100.0" endY="157.0" layoutX="504.0" layoutY="186.0" startX="-100.0" />
-      <Line fx:id="armLeft" endX="-15.0" endY="-28.0" layoutX="418.0" layoutY="239.0" startX="-100.0" />
-      <Line fx:id="armRight" endX="100.0" layoutX="305.0" layoutY="207.0" startX="148.0" startY="56.0" />
-      <Line fx:id="legLeft" endX="100.0" layoutX="306.0" layoutY="344.0" startX="55.0" startY="57.0" />
-      <Line fx:id="legRight" endX="-60.0" endY="48.0" layoutX="504.0" layoutY="344.0" startX="-100.0" />
+      <Line fx:id="body" endX="-100.0" endY="157.0" layoutX="504.0" layoutY="186.0" startX="-100.0" visible="false" />
+      <Line fx:id="armLeft" endX="-15.0" endY="-28.0" layoutX="418.0" layoutY="239.0" startX="-100.0" visible="false" />
+      <Line fx:id="armRight" endX="100.0" layoutX="305.0" layoutY="207.0" startX="148.0" startY="56.0" visible="false" />
+      <Line fx:id="legLeft" endX="100.0" layoutX="306.0" layoutY="344.0" startX="55.0" startY="57.0" visible="false" />
+      <Line fx:id="legRight" endX="-60.0" endY="48.0" layoutX="504.0" layoutY="344.0" startX="-100.0" visible="false" />
       <Label layoutX="182.0" layoutY="506.0" text="Enter Guess (must be a single letter): ">
          <font>
             <Font size="24.0" />
@@ -65,7 +65,7 @@
       <Line endY="68.5" layoutX="595.0" layoutY="354.0" startY="-314.3999938964844" />
       <Line endX="100.0" layoutX="495.0" layoutY="39.0" startX="-89.79998779296875" startY="-1.9073486328125E-6" />
       <Line endX="-1.0" endY="25.00000762939453" layoutX="405.0" layoutY="74.0" startX="-0.507080078125" startY="-34.29289245605469" />
-      <Button alignment="CENTER" layoutY="692.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="93.0" style="-fx-background-color: RED;" text="EXIT">
+      <Button alignment="CENTER" layoutY="692.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="40.0" prefWidth="93.0" style="-fx-background-color: RED;" text="EXIT">
          <font>
             <Font size="18.0" />
          </font>

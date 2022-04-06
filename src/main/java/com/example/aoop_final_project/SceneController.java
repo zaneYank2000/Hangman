@@ -23,15 +23,6 @@ public class SceneController {
         stage.show();
     }
 
-    public void switchToMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("menu.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Main Menu");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void switchToGame(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("game.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
