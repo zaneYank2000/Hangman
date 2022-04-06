@@ -31,13 +31,22 @@ public class MenuController {
 
     @FXML
     void hostGameClicked(ActionEvent event) throws IOException {
-        //create new game
+
+        Parent root = FXMLLoader.load(getClass().getResource("popup.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Mystery Phrase");
+        stage.setScene(scene);
+        stage.show();
+
+        /*create new game
         Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Hangman");
         stage.setScene(scene);
         stage.show();
+         */
 
         //pass username and user's score in
 
