@@ -68,6 +68,9 @@
          </children>
       </HBox>
       <Label alignment="CENTER" layoutX="241.0" layoutY="441.0" prefHeight="35.0" prefWidth="491.0" text="Letters Used: " textAlignment="CENTER" />
-      <Label fx:id="displayLabel" alignment="CENTER" layoutX="7.0" layoutY="596.0" prefHeight="61.0" prefWidth="959.0" text="Label" />
+      <Label fx:id="displayLabel" alignment="CENTER" layoutX="7.0" layoutY="596.0" prefHeight="61.0" prefWidth="959.0" text="Label">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
    </children>
 </AnchorPane>

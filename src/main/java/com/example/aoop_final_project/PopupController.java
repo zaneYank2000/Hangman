@@ -9,13 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
 
 
 public class PopupController {
@@ -38,27 +32,24 @@ public class PopupController {
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();
-            pw.print(word);
+            pw.print(word.trim());
             pw.close();
+
+            //TODO: insert only space case needs fixed
+            if(!wordTextField.getText().equals("")) {
+                Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setTitle("Hangman");
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                errorText.setText("You can not leave the text field blank");
+            }
         } catch (IOException e){
             System.out.println("Error occurred.");
             e.printStackTrace();
         }
-
-
-
-        //TODO: FIX THIS IF STATEMENT
-        if(1==1) {
-            Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setTitle("Hangman");
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            errorText.setText("You can not leave the text field blank");
-        }
-
     }
 }
 

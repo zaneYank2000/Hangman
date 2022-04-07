@@ -8,19 +8,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameController {
-
-    @FXML
-    private Text aText;
 
     @FXML
     private Line armLeft;
@@ -29,28 +27,10 @@ public class GameController {
     private Line armRight;
 
     @FXML
-    private Text bTExt;
-
-    @FXML
-    private HBox blankHBox;
-
-    @FXML
     private Line body;
 
     @FXML
-    private Text cText;
-
-    @FXML
-    private Text dText;
-
-    @FXML
-    private Text eText;
-
-    @FXML
-    private Text fText;
-
-    @FXML
-    private Text gText;
+    private Label displayLabel;
 
     @FXML
     private Label gameID;
@@ -59,61 +39,13 @@ public class GameController {
     private TextField guessTextField;
 
     @FXML
-    private Text hText;
-
-    @FXML
     private Circle head;
-
-    @FXML
-    private Text iText;
-
-    @FXML
-    private Text jText;
-
-    @FXML
-    private Text kText;
-
-    @FXML
-    private Text lText;
 
     @FXML
     private Line legLeft;
 
     @FXML
     private Line legRight;
-
-    @FXML
-    private Text mText;
-
-    @FXML
-    private Text nText;
-
-    @FXML
-    private Text oText;
-
-    @FXML
-    private Text pText;
-
-    @FXML
-    private Text qText;
-
-    @FXML
-    private Text rText;
-
-    @FXML
-    private Text sText;
-
-    @FXML
-    private Text stringWord;
-
-    @FXML
-    private Label stringLabel;
-
-    @FXML
-    private Text tText;
-
-    @FXML
-    private Text uText;
 
     @FXML
     private Label user1Score;
@@ -126,21 +58,6 @@ public class GameController {
 
     @FXML
     private Label username2;
-
-    @FXML
-    private Text vText;
-
-    @FXML
-    private Text wText;
-
-    @FXML
-    private Text xText;
-
-    @FXML
-    private Text yText;
-
-    @FXML
-    private Text zText;
 
     /* TRYING TO ADD REGEX
     @FXML
@@ -155,13 +72,33 @@ public class GameController {
 
 
     public void initialize() {
-        //Text t = new Text("_");
-        //t.setFont(Font.font(24));
+        ArrayList wordArray = new ArrayList();
+        ArrayList wordBlank = new ArrayList();
 
-        //for(int i = 0; i < 3; i++) {
-        //    blankHBox.getChildren().add(t);
-        //}
-
+        //read from 'word.txt' and save it to an ArrayList
+        try {
+            File myObj = new File("src/main/resources/com/example/aoop_final_project", "word.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {                  //while file still has word
+                String word = myReader.nextLine();            //extract word
+                for (int i = 0; i < word.length(); i++) {
+                    wordArray.add(word.charAt(i));            //save word as ArrayList of individual chars
+                    wordBlank.add("_");                       //each letter will be '_'
+                    System.out.println(wordArray.toString()); //TODO: delete after debug
+                    System.out.println(wordBlank.toString()); //TODO: delete after debug
+                }
+                for(int j = 0; j < wordArray.size(); j++) {   //write '_' for each letter in phrase
+                    displayLabel.setText(wordBlank.toString()
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace(",", ""));
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     @FXML
