@@ -9,20 +9,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.GameController">
    <children>
       <Circle fx:id="head" fill="DODGERBLUE" layoutX="404.0" layoutY="142.0" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="stringLabel" alignment="CENTER" layoutX="14.0" layoutY="496.0" prefHeight="222.0" prefWidth="949.0" text="____ ____ __ __ ____ _____ __ __ __ _____ _______ ___ __ __ __" wrapText="true">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="warningLabel" alignment="CENTER" layoutX="263.0" layoutY="441.0" prefHeight="54.0" prefWidth="367.0" text="A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
       <Line fx:id="body" endX="-100.0" endY="157.0" layoutX="504.0" layoutY="186.0" startX="-100.0" visible="false" />
       <Line fx:id="armLeft" endX="-15.0" endY="-28.0" layoutX="418.0" layoutY="239.0" startX="-100.0" visible="false" />
       <Line fx:id="armRight" endX="100.0" layoutX="305.0" layoutY="207.0" startX="148.0" startY="56.0" visible="false" />
@@ -77,5 +68,141 @@
             <Button mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
          </children>
       </HBox>
+      <HBox layoutX="217.0" layoutY="456.0" prefHeight="18.0" prefWidth="202.0" spacing="10.0">
+         <children>
+            <Text fx:id="aText" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="bTExt" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="cText" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dText" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="eText" strokeType="OUTSIDE" strokeWidth="0.0" text="E">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="fText" strokeType="OUTSIDE" strokeWidth="0.0" text="F">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="gText" strokeType="OUTSIDE" strokeWidth="0.0" text="G">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="hText" strokeType="OUTSIDE" strokeWidth="0.0" text="H">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="iText" strokeType="OUTSIDE" strokeWidth="0.0" text="I">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="jText" strokeType="OUTSIDE" strokeWidth="0.0" text="J">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="kText" strokeType="OUTSIDE" strokeWidth="0.0" text="K">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="lText" strokeType="OUTSIDE" strokeWidth="0.0" text="L">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="mText" strokeType="OUTSIDE" strokeWidth="0.0" text="M">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="nText" strokeType="OUTSIDE" strokeWidth="0.0" text="N">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="oText" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="pText" strokeType="OUTSIDE" strokeWidth="0.0" text="P">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="qText" strokeType="OUTSIDE" strokeWidth="0.0" text="Q">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="rText" strokeType="OUTSIDE" strokeWidth="0.0" text="R">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="sText" strokeType="OUTSIDE" strokeWidth="0.0" text="S">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="tText" strokeType="OUTSIDE" strokeWidth="0.0" text="T">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="uText" strokeType="OUTSIDE" strokeWidth="0.0" text="U">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="vText" strokeType="OUTSIDE" strokeWidth="0.0" text="V">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="wText" strokeType="OUTSIDE" strokeWidth="0.0" text="W">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="X" fx:id="xText">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="yText" strokeType="OUTSIDE" strokeWidth="0.0" text="Y">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="zText" strokeType="OUTSIDE" strokeWidth="0.0" text="Z">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox fx:id="blankHBox" alignment="CENTER" layoutX="394.0" layoutY="568.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
+      <Text fx:id="stringWord" layoutX="251.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
    </children>
 </AnchorPane>

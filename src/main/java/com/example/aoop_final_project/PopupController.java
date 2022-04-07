@@ -9,13 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import java.util.ArrayList;
 
 public class PopupController {
+    public ArrayList wordArray = new ArrayList<>();
 
     @FXML
     private Text errorText;
@@ -30,14 +29,7 @@ public class PopupController {
 
     @FXML
     void confirmButtonClicked(ActionEvent event) throws IOException {
-        ArrayList wordArray = new ArrayList();
-        String word = wordTextField.getText();
-
-        if(!word.isEmpty()) {
-            for(int i = 0; i < word.length(); i++) {
-                wordArray.add(word.charAt(i));
-                System.out.println(wordArray.toString()); //USED FOR DEBUG PURPOSES
-            }
+        if(1==1) {
             Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -47,7 +39,7 @@ public class PopupController {
         } else {
             errorText.setText("You can not leave the text field blank");
         }
-    }
 
+    }
 }
 
