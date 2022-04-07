@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.*;
+import java.util.Locale;
 
 
 public class PopupController {
@@ -32,7 +33,7 @@ public class PopupController {
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();
-            pw.print(word.trim());
+            pw.print(word.toUpperCase(Locale.ROOT).trim());
             pw.close();
 
             //TODO: insert only space case needs fixed

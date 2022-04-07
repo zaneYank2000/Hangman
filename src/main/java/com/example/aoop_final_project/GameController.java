@@ -16,9 +16,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class GameController {
+    ArrayList wordArray = new ArrayList(); //used to save word as char array
+    ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
+    ArrayList positions = new ArrayList();
 
     @FXML
     private Line armLeft;
@@ -48,6 +52,9 @@ public class GameController {
     private Line legRight;
 
     @FXML
+    private Label lettersUsedLabel;
+
+    @FXML
     private Label user1Score;
 
     @FXML
@@ -72,10 +79,7 @@ public class GameController {
 
 
     public void initialize() {
-        ArrayList wordArray = new ArrayList();
-        ArrayList wordBlank = new ArrayList();
-
-        //read from 'word.txt' and save it to an ArrayList
+        //read phrase from 'word.txt' and save it to an ArrayList
         try {
             File myObj = new File("src/main/resources/com/example/aoop_final_project", "word.txt");
             Scanner myReader = new Scanner(myObj);
@@ -84,9 +88,10 @@ public class GameController {
                 for (int i = 0; i < word.length(); i++) {
                     wordArray.add(word.charAt(i));            //save word as ArrayList of individual chars
                     wordBlank.add("_");                       //each letter will be '_'
-                    System.out.println(wordArray.toString()); //TODO: delete after debug
-                    System.out.println(wordBlank.toString()); //TODO: delete after debug
+                                                              //TODO:Make it so that spaces are auto revealed
                 }
+                System.out.println(wordArray.toString()); //TODO: delete after debug
+                System.out.println(wordBlank.toString()); //TODO: delete after debug
                 for(int j = 0; j < wordArray.size(); j++) {   //write '_' for each letter in phrase
                     displayLabel.setText(wordBlank.toString()
                             .replace("[", "")
@@ -113,7 +118,16 @@ public class GameController {
 
     @FXML
     void submitButtonClicked(ActionEvent event) {
-        System.out.println("Submit clicked: " + guessTextField.getText() + " guessed"); //FOR DEBUG
+        String guess = guessTextField.getText().toUpperCase(Locale.ROOT);
+        System.out.println("Submit clicked: " + guess + " guessed"); //FOR DEBUG
+        if(guess.isEmpty()) {                                             //no letter guessed
+            guessTextField.setPromptText("Please insert letter");
+        } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
+            System.out.println("LETTER IN PHRASE " + wordArray.size());
+            //TODO: Reveal all spots that have letter
+        } else {                                                          //letters not found in phrase
+            lettersUsedLabel.setText("Letters Used: " + guess); //TODO: right now this only returns the current guess, need to add all guesses
+        }
         guessTextField.clear();
     }
 
