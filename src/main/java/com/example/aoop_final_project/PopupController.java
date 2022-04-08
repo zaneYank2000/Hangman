@@ -34,7 +34,7 @@ public class PopupController {
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();
             pw.print(word.toUpperCase(Locale.ROOT).trim());
-            pw.close();
+            pw.close(); 
 
             //TODO: insert only space case needs fixed
             if(!wordTextField.getText().equals("")) {
