@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -22,7 +23,8 @@ import java.util.Scanner;
 public class GameController {
     ArrayList wordArray = new ArrayList(); //used to save word as char array
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
-    ArrayList positions = new ArrayList();
+    int lives = 7;
+    boolean keepPlaying = true;
 
     @FXML
     private Line armLeft;
@@ -38,6 +40,9 @@ public class GameController {
 
     @FXML
     private Label gameID;
+
+    @FXML
+    private ImageView gameOverImage;
 
     @FXML
     private TextField guessTextField;
@@ -83,20 +88,22 @@ public class GameController {
         try {
             File myObj = new File("src/main/resources/com/example/aoop_final_project", "word.txt");
             Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {                  //while file still has word
-                String word = myReader.nextLine();            //extract word
+            while (myReader.hasNextLine()) {                      //while file still has word
+                String word = myReader.nextLine();                //extract word
                 for (int i = 0; i < word.length(); i++) {
-                    wordArray.add(word.charAt(i));            //save word as ArrayList of individual chars
-                    wordBlank.add("_");                       //each letter will be '_'
-                                                              //TODO:Make it so that spaces are auto revealed
+                    wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
+                    wordBlank.add("_");                           //each letter will be '_'
                 }
                 System.out.println(wordArray.toString()); //TODO: delete after debug
-                System.out.println(wordBlank.toString()); //TODO: delete after debug
-                for(int j = 0; j < wordArray.size(); j++) {   //write '_' for each letter in phrase
+                for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
+                    if(wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
+                        wordBlank.set(j, " ");
+                    }
                     displayLabel.setText(wordBlank.toString()
                             .replace("[", "")
                             .replace("]", "")
                             .replace(",", ""));
+                    System.out.println(wordBlank.toString()); //TODO: delete after debug
                 }
             }
             myReader.close();
@@ -119,16 +126,43 @@ public class GameController {
     @FXML
     void submitButtonClicked(ActionEvent event) {
         String guess = guessTextField.getText().toUpperCase(Locale.ROOT);
-        System.out.println("Submit clicked: " + guess + " guessed"); //FOR DEBUG
+
         if(guess.isEmpty()) {                                             //no letter guessed
             guessTextField.setPromptText("Please insert letter");
         } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
-            System.out.println("LETTER IN PHRASE " + wordArray.size());
-            //TODO: Reveal all spots that have letter
-        } else {                                                          //letters not found in phrase
-            lettersUsedLabel.setText("Letters Used: " + guess); //TODO: right now this only returns the current guess, need to add all guesses
+            for(int k = 0; k < wordArray.size(); k++) {
+                if(wordArray.get(k).toString().equals(guess)) {           //if letter is in phrase, show it
+                    wordBlank.set(k, guess);
+                    displayLabel.setText(wordBlank.toString()
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace(",", ""));
+                }
+            }
+        } else {                                                          //letter not found in phrase
+            lives--;
+            checkLives(lives);
+            
         }
+
+        if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
+            System.out.println("GAME WON");
+        }
+
         guessTextField.clear();
+    }
+    
+    private void checkLives(int lives) {
+        switch (lives) {
+            case 6: head.setVisible(true); break;
+            case 5: body.setVisible(true); break;
+            case 4: armLeft.setVisible(true); break;
+            case 3: armRight.setVisible(true); break;
+            case 2: legLeft.setVisible(true); break;
+            case 1: legRight.setVisible(true); break;
+            case 0: gameOverImage.setVisible(true);
+                    //decide what happens when this gets pushed to server
+        }
     }
 
 }
