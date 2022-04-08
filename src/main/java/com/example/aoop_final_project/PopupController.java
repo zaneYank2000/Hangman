@@ -36,7 +36,6 @@ public class PopupController {
             pw.print(word.toUpperCase(Locale.ROOT).trim());
             pw.close(); 
 
-            //TODO: insert only space case needs fixed
             if(!wordTextField.getText().equals("")) {
                 Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
