@@ -9,6 +9,7 @@ module com.example.aoop_final_project {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires javafx.media;
 
     opens com.example.aoop_final_project to javafx.fxml;
     exports com.example.aoop_final_project;
