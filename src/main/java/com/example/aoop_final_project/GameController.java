@@ -8,7 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -25,6 +28,9 @@ public class GameController {
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
     int lives = 7;
     boolean keepPlaying = true;
+    String winSound = "src/main/resources/com/example/aoop_final_project/happy_wheels_win.mp3";
+    String loseSound = "src/main/resources/com/example/aoop_final_project/Wilhelm-Scream.mp3";
+    String winImage = "src/main/resources/com/example/aoop_final_project/you_win.png";
 
     @FXML
     private Line armLeft;
@@ -43,6 +49,9 @@ public class GameController {
 
     @FXML
     private ImageView gameOverImage;
+
+    @FXML
+    private ImageView youWinImage1;
 
     @FXML
     private TextField guessTextField;
@@ -142,11 +151,11 @@ public class GameController {
         } else {                                                          //letter not found in phrase
             lives--;
             checkLives(lives);
-            
         }
 
         if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
             System.out.println("GAME WON");
+            win();
         }
 
         guessTextField.clear();
@@ -160,9 +169,22 @@ public class GameController {
             case 3: armRight.setVisible(true); break;
             case 2: legLeft.setVisible(true); break;
             case 1: legRight.setVisible(true); break;
-            case 0: gameOverImage.setVisible(true);
+            case 0: lose();
                     //decide what happens when this gets pushed to server
         }
     }
 
+    private void lose() {
+        gameOverImage.setVisible(true);
+        Media sound = new Media(new File(loseSound).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
+
+    private void win() {
+        youWinImage1.setVisible(true);
+        Media sound = new Media(new File(winSound).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
 }
