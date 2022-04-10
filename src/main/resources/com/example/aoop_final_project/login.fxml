@@ -76,9 +76,9 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2e354f;">
                     <children>
-                        <Label layoutX="103.0" layoutY="10.0" text="Hangman" textFill="#8c90b3">
+                        <Label layoutX="103.0" layoutY="8.0" text="Hangman" textFill="#8c90b3">
                             <font>
-                                <Font size="23.0" />
+                                <Font name="Comic Sans MS" size="23.0" />
                             </font>
                         </Label>
                     </children>
@@ -98,7 +98,7 @@
                 </AnchorPane>
                 <ImageView fx:id="ic" fitHeight="152.0" fitWidth="200.0" layoutX="83.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="hangman.png" />
+                        <Image url="@hangman.png" />
                     </image>
                 </ImageView>
                 <Button fx:id="logInButton" layoutX="-3.0" layoutY="431.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="316.0" style="-fx-background-color: #43bb73;" text="Login" textFill="WHITE">
