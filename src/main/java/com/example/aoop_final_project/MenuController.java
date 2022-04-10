@@ -9,7 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.util.Locale;
+import javax.swing.*;
 
 public class MenuController
 {
@@ -59,14 +63,14 @@ public class MenuController
             e.printStackTrace();
         }
 
-        /*create new game
+        //create new game
         Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Hangman");
         stage.setScene(scene);
         stage.show();
-         */
+
 
         //pass username and user's score in
 
