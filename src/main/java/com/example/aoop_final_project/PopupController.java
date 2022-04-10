@@ -12,12 +12,10 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.Locale;
 
-
-public class PopupController {
-
+public class PopupController
+{
     @FXML
     private Text errorText;
-
     @FXML
     private TextField wordTextField;
 
@@ -29,14 +27,18 @@ public class PopupController {
     @FXML
     void confirmButtonClicked(ActionEvent event) throws IOException {
         try {
+            //create text file and throw word into it
             File wordFile = new File("src/main/resources/com/example/aoop_final_project", "word.txt");
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();
             pw.print(word.toUpperCase(Locale.ROOT).trim());
+
+            //pass the word to server
+
             pw.close();
 
-            //TODO: insert only space case needs fixed
+            //if word is not empty
             if(!wordTextField.getText().equals("")) {
                 Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

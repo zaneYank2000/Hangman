@@ -20,54 +20,44 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class GameController {
+public class GameController
+{
+    // Instance variables
     ArrayList wordArray = new ArrayList(); //used to save word as char array
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
-    int lives = 7;
+    static int lives = 7;
     boolean keepPlaying = true;
 
+    //FXML Objects
     @FXML
     private Line armLeft;
-
     @FXML
     private Line armRight;
-
     @FXML
     private Line body;
-
-    @FXML
-    private Label displayLabel;
-
-    @FXML
-    private Label gameID;
-
-    @FXML
-    private ImageView gameOverImage;
-
-    @FXML
-    private TextField guessTextField;
-
     @FXML
     private Circle head;
-
     @FXML
     private Line legLeft;
-
     @FXML
     private Line legRight;
 
     @FXML
+    private Label displayLabel;
+    @FXML
+    private Label gameID;
+    @FXML
+    private ImageView gameOverImage;
+    @FXML
+    private TextField guessTextField;
+    @FXML
     private Label lettersUsedLabel;
-
     @FXML
     private Label user1Score;
-
     @FXML
     private Label user2Score;
-
     @FXML
     private Label username1;
-
     @FXML
     private Label username2;
 
@@ -112,6 +102,7 @@ public class GameController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void exitButtonClicked(ActionEvent event) throws IOException {
