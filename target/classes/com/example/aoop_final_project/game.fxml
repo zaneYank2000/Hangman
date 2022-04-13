@@ -78,5 +78,10 @@
          <image>
             <Image url="@game_over.png" />
          </image></ImageView>
+      <ImageView fx:id="youWinImage1" fitHeight="426.0" fitWidth="566.0" layoutX="214.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@you_win.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
