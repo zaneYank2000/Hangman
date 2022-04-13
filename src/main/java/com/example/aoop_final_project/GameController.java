@@ -95,7 +95,7 @@ public class GameController {
     public void initialize() {
         //read phrase from 'word.txt' and save it to an ArrayList
         try {
-            File myObj = new File("src/main/resources/com/example/aoop_final_project", "word.txt");
+            File myObj = new File("word.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {                      //while file still has word
                 String word = myReader.nextLine();                //extract word
