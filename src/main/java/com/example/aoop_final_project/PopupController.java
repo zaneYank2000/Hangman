@@ -34,8 +34,6 @@ public class PopupController
             String word = wordTextField.getText();
             pw.print(word.toUpperCase(Locale.ROOT).trim());
 
-            //pass the word to server
-
             pw.close();
 
             //if word is not empty

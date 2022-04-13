@@ -15,6 +15,11 @@ public class Server {
     private UserThread[] threads;
     private int numUsers;
 
+    String word;
+    String guess;
+    boolean host = false;
+    WordInformation wordInfo;
+
     public static void main(String[] args) throws IOException {
         Server s = new Server(2);
     }
@@ -55,9 +60,8 @@ public class Server {
         //call send message that user left
     }
 
-    //Method to send a message to all clients.  This is synchronized
-    //to ensure that a message is not interrupted by another message
-    //TODO: Repurpose
+    //Method to send a message to all clients. This is synchronized to ensure
+    //that a message is not interrupted by another message.
     public synchronized void SendMsg(String msg) {
         for(int i = 0; i < numUsers; i++) {
             ObjectOutputStream out = threads[i].getOutputStream();
@@ -65,28 +69,39 @@ public class Server {
                 out.writeObject(msg);
                 out.flush();
             } catch (IOException e) {
-                System.out.println("Problem sending message");
+                System.out.println("Problem sending message to client.");
             }
         }
     }
 
+    // Receives the messages
     private void runServer() throws IOException {
         ServerSocket s = new ServerSocket(PORT);
         System.out.println("Started: " + s);
         try {
             while(true) {
+                // Ensure only 2 users are allowed at a time
                 if(numUsers < MAX_USERS) {
                     try {
+                        // Create a new server socket
                         Socket newSocket = s.accept();
+                        System.out.println("Created a new socket in the server...");
+
+                        // Comment
                         synchronized (this) {
                             users[numUsers] = newSocket;
-                            ObjectInputStream in = new ObjectInputStream(newSocket.getInputStream());
+                            // Get the inputstream to get the message
+                            ObjectInputStream in;
+                            in = new ObjectInputStream(newSocket.getInputStream());
 
-                            String newName = (String) in.readObject();
-                            SendMsg(newName + " has joined the chat");
+                            // Get the name
+                            String newName = (String) in.readObject(); //the phrase????
+                            //SendMsg(newName + " has joined the chat");
+                            SendMsg(newName);
+                            System.out.println("Phrase is being sent to client: " + newName);
                             threads[numUsers] = new UserThread(newSocket, numUsers, newName, in);
                             threads[numUsers].start();
-                            System.out.println("Connection" + numUsers + users[numUsers]);
+                            System.out.println("Connection " + numUsers + users[numUsers]);
                             numUsers++;
 
                         }
@@ -96,7 +111,7 @@ public class Server {
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -141,7 +156,7 @@ public class Server {
                         Server.this.SendMsg(newMsg);
                     }
                 } catch (ClassNotFoundException e) {
-                    System.out.println("Error recieving message... shutting down");
+                    System.out.println("Error receiving message... shutting down");
                     alive = false;
                 } catch (IOException e) {
                     System.out.println("Client closing!!");

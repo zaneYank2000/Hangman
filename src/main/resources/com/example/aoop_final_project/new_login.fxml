@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.LoginController">
+    <children>
+        <AnchorPane layoutY="419.0" prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #43bb73;">
+            <children>
+                <Label layoutX="133.0" layoutY="11.0" prefHeight="17.0" prefWidth="45.0" text="Log23in">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <ImageView fitHeight="107.0" fitWidth="140.0" layoutX="102.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@icon.png" />
+            </image>
+        </ImageView>
+        <Circle fill="DODGERBLUE" layoutX="154.0" layoutY="155.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+        <ImageView fitHeight="73.0" fitWidth="80.0" layoutX="114.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@pic.jpg" />
+            </image>
+        </ImageView>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #2c344b;">
+            <children>
+                <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2e354f;">
+                    <children>
+                        <Label layoutX="103.0" layoutY="10.0" text="Hangman" textFill="#8c90b3">
+                            <font>
+                                <Font size="23.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="19.0" layoutY="222.0" prefHeight="50.0" prefWidth="270.0" style="-fx-border-color: #8c90b3; -fx-border-radius: 2;">
+                    <children>
+                        <TextField fx:id="usernameTextField" layoutX="83.0" layoutY="12.0" prefHeight="27.0" prefWidth="176.0" />
+                        <Label layoutX="6.0" layoutY="18.0" text="User Name:" textFill="WHITE" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="20.0" layoutY="298.0" prefHeight="50.0" prefWidth="270.0" style="-fx-border-color: #8c90b3; -fx-border-radius: 2;">
+                    <children>
+                        <Label layoutX="16.0" layoutY="17.0" text="Password:" textFill="WHITE" />
+                        <PasswordField fx:id="passwordPasswordField" layoutX="80.0" layoutY="12.0" prefHeight="27.0" prefWidth="176.0" />
+                    </children>
+                </AnchorPane>
+                <ImageView fx:id="ic" fitHeight="152.0" fitWidth="200.0" layoutX="83.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@hangman.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="logInButton" layoutX="-3.0" layoutY="431.0" mnemonicParsing="false" onAction="#Login" prefHeight="36.0" prefWidth="316.0" style="-fx-background-color: #43bb73;" text="Login" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Button fx:id="signUpButton" layoutX="107.0" layoutY="377.0" mnemonicParsing="false" onAction="#signUp" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #2c344b;" text="Sign Up" textFill="WHITE">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Button>
+
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

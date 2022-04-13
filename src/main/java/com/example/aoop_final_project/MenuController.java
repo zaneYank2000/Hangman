@@ -94,7 +94,6 @@ public class MenuController
             myOutputStream.flush();
             ObjectInputStream myInputStream = new ObjectInputStream(socket.getInputStream());
 
-
         } catch (Exception e) {
             System.out.println("Problem starting client");
         }
@@ -102,7 +101,22 @@ public class MenuController
 
     @FXML
     void logOutClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        //Clear the current user by deleting and making a new file
+        File f = new File("src/main/resources/com/example/aoop_final_project/current_user.dat");
+        f.delete();
+        //Make the new file
+        if(!(f.isFile())) {
+            try {
+                FileOutputStream data = new FileOutputStream("src/main/resources/com/example/aoop_final_project/current_user.dat");
+                data.close();
+            } catch (Exception ex) {
+                System.err.println("error, could not make file");
+            }
+        }
+
+
+        //Return to the login page
+        Parent root = FXMLLoader.load(getClass().getResource("new_login.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Welcome to Hangman!");

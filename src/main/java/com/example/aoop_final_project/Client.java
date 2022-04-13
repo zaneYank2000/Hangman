@@ -8,19 +8,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Client extends Application
-{
+public class Client extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("new_game.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Welcome to Hangman!");
+        stage.setTitle("Client"); // displayed in window's title bar
         stage.setScene(scene);
         stage.show();
     }
-
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
