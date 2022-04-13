@@ -155,7 +155,7 @@ public class GameController {
 
         if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
             System.out.println("GAME WON");
-            win();
+            youWinImage1.setVisible(true);
         }
 
         guessTextField.clear();
@@ -168,11 +168,12 @@ public class GameController {
             case 4: armLeft.setVisible(true); break;
             case 3: armRight.setVisible(true); break;
             case 2: legLeft.setVisible(true); break;
-            case 1: legRight.setVisible(true); lose(); break;
+            case 1: legRight.setVisible(true); gameOverImage.setVisible(true);; break;
         }
     }
 
 
+    /*
     private void lose() {
         gameOverImage.setVisible(true);
         Media sound = new Media(loseSound);
@@ -187,4 +188,6 @@ public class GameController {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
+
+     */
 }
