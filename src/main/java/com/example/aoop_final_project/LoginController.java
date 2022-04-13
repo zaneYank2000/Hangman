@@ -38,12 +38,12 @@ public class LoginController {
 
     public void Login(ActionEvent event) throws IOException {
 
-        boolean found = false;
-        String tempusername = "";
-        String tempassword = "";
-        Scanner scan = new Scanner("members.txt");
-        scan.useDelimiter(",");
-
+        File wordFile = new File("members.txt");
+        FileWriter fw = new FileWriter(wordFile);
+        PrintWriter pw = new PrintWriter(fw);
+        pw.write("user" + "," + "pass" + "\n");
+        pw.write("\n");
+        pw.close();
 
         if(usernameTextField.getText().equals("user") && passwordPasswordField.getText().equals("pass")) {
 
@@ -72,6 +72,7 @@ public class LoginController {
         pw.write(newusername + "," + newpassword + "\n");
         pw.write("\n");
         pw.close();
+
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

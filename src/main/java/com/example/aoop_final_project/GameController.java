@@ -92,7 +92,7 @@ public class GameController {
      */
 
 
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
         //read phrase from 'word.txt' and save it to an ArrayList
         try {
             File myObj = new File("word.txt");
@@ -120,6 +120,13 @@ public class GameController {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        Scanner scan = new Scanner(new File("members.txt"));
+        scan.useDelimiter(",");
+
+        String tempusername = "";
+        tempusername = scan.next();
+        username1.setText(tempusername);
     }
 
     @FXML
