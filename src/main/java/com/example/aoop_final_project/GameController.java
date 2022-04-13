@@ -168,22 +168,22 @@ public class GameController {
             case 4: armLeft.setVisible(true); break;
             case 3: armRight.setVisible(true); break;
             case 2: legLeft.setVisible(true); break;
-            case 1: legRight.setVisible(true); break;
-            case 0: lose();
-                    //decide what happens when this gets pushed to server
+            case 1: legRight.setVisible(true); lose(); break;
         }
     }
 
+
     private void lose() {
         gameOverImage.setVisible(true);
-        Media sound = new Media(new File(loseSound).toURI().toString());
+        Media sound = new Media(loseSound);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
 
+
     private void win() {
         youWinImage1.setVisible(true);
-        Media sound = new Media(new File(winSound).toURI().toString());
+        Media sound = new Media(winSound);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
