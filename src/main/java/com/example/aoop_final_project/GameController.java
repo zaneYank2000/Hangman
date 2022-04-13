@@ -136,12 +136,18 @@ public class GameController
     private void startGame(ActionEvent event) throws IOException {
         myName = JOptionPane.showInputDialog("Enter a user name: ");
         serverName = JOptionPane.showInputDialog("Enter server name: ");
-        //while(gameWord != null || isHost) {
-            gameWord = JOptionPane.showInputDialog("Enter a word/phrase: ");
-        //}
+        try {
+            if (isHost == false) {
+                do {
+                    gameWord = JOptionPane.showInputDialog("Enter a word/phrase: ");
+                } while (gameWord.equals("".trim()));
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Im gay");
+        }
 
         //Initialise the label with the word
-        prepareLabel();
+        //prepareLabel();
         wordInfo = new WordInformation(gameWord);
         wordInfo.setHost(true);
         isHost = wordInfo.isHost();
@@ -152,8 +158,15 @@ public class GameController
         myOutputStream = new ObjectOutputStream(socket.getOutputStream());
         myOutputStream.flush();
         // Send client's name to server
-        myOutputStream.writeObject(gameWord); //was name
-        myOutputStream.flush();
+        try {
+            System.out.println("in game " + wordInfo.toString());
+            myOutputStream.writeObject(wordInfo); //was name
+            myOutputStream.flush();
+        } catch (NullPointerException e) {
+            System.out.println("null pointer sending wordinfo");
+        } catch (NotSerializableException e) {
+            System.out.println("not serializible sending wordinfo");
+        }
         ObjectInputStream myInputStream = new ObjectInputStream(socket.getInputStream());
 
         username1.setText(myName);
@@ -225,37 +238,61 @@ public class GameController
 
     @FXML
     void enterMessage(ActionEvent event) {
-        String guess = guessTextField.getText().trim();
+        //Get the guess from the textbox
+        try {
+            //if (!isHost) {
+                //do {
+                    String guess = guessTextField.getText().trim();
+                    System.out.println("Guess: " + guess);
+                    wordInfo.setGuess(guess);;
+                //} while (guess.equals());
+            //}
+        } catch (NullPointerException e) {
+            System.out.println("Im gay");
+        }
         guessTextField.setText("");
-        System.out.println(guess);
+        //System.out.println(wordInfo.getGuess());
+
         try {
             //Send message to server
             System.out.println("About to send a message...");
-            myOutputStream.writeObject(guess);
+            myOutputStream.writeObject(wordInfo);
             myOutputStream.flush();
-            System.out.println("Sent guess, '" + guess + "', to server");
+            System.out.println("Sent guess, '" + wordInfo.getGuess() + "', to server");
         }
         catch (IOException ioException)  {
-            System.out.println("Problem sending message to server.");
+            System.out.println("Problem sending guess to server.");
         }
 
-        if(guess.isEmpty()) {                                             //no letter guessed
+        if(wordInfo.getGuess().equals("".trim())) {                                             //no letter guessed
             guessTextField.setPromptText("Please insert letter");
-        } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
-            for(int k = 0; k < wordArray.size(); k++) {
-                if(wordArray.get(k).toString().equals(guess)) {           //if letter is in phrase, show it
-                    wordBlank.set(k, guess);
-                    displayLabel.setText(wordBlank.toString()
+        } else if (wordInfo.getWordArray().contains(guess)) {                //letter(s) found in phrase
+
+            for(int k = 0; k < wordInfo.getWordArray().size(); k++) {
+                if(wordInfo.getWordArray().get(k).toString().equals(wordInfo.getGuess())) {           //if letter is in phrase, show it
+                    wordInfo.getWordBlank().set(k, guess);
+                    displayLabel.setText(wordInfo.getWordBlank().toString()
                             .replace("[", "")
                             .replace("]", "")
                             .replace(",", ""));
                 }
             }
+
+
+            //Send guess to the server
+            try {
+                myOutputStream.writeObject(wordInfo);
+                myOutputStream.flush();
+                System.out.println("Client has sent: " + wordInfo.toString());
+            } catch (IOException e) {
+                System.out.println("Problem sending message to server.");
+            }
+
         } else {                                                          //letter not found in phrase
             lives--;
             checkLives(lives);
         }
-        if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
+        if(wordInfo.getWordArray() == wordInfo.getWordBlank()) {            //if full phrase is guessed, player wins
             System.out.println("GAME WON");
         }
         //Clear the textfield
@@ -276,11 +313,16 @@ public class GameController
             System.out.println("Entered ClientConnection run method...");
             while (true)
             {
+                //TODO: fix so it works with new setup
                 try {
-                    String receivedMessage = (String) inStr.readObject(); //dedded
+
+                    WordInformation w = (WordInformation) inStr.readObject(); //dedded
+                    System.out.println("w " + wordInfo);
+                    wordInfo.setGuess(w.getGuess()); //= w;
+                    System.out.println("wordinfo " + wordInfo);
                     //System.out.println("wordlabel should be " + receivedMessage);
-                    //displayLabel.setText((String) inStr.readObject()); //fucking retarted ass label
-                    JOptionPane.showMessageDialog(null, receivedMessage);
+                    //displayLabel.setText(w.getWordBlank().toString()); //fucking retarted ass label
+                    JOptionPane.showMessageDialog(null, wordInfo.getWordBlank());
                     //send to the letter guesser
 
                 }

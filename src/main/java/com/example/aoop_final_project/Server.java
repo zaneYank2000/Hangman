@@ -62,11 +62,11 @@ public class Server {
 
     //Method to send a message to all clients. This is synchronized to ensure
     //that a message is not interrupted by another message.
-    public synchronized void SendMsg(String msg) {
+    public synchronized void SendMsg(WordInformation w) {
         for(int i = 0; i < numUsers; i++) {
             ObjectOutputStream out = threads[i].getOutputStream();
             try {
-                out.writeObject(msg);
+                out.writeObject(w);
                 out.flush();
             } catch (IOException e) {
                 System.out.println("Problem sending message to client.");
@@ -95,18 +95,22 @@ public class Server {
                             in = new ObjectInputStream(newSocket.getInputStream());
 
                             // Get the name
-                            String newName = (String) in.readObject(); //the phrase????
-                            //SendMsg(newName + " has joined the chat");
-                            SendMsg(newName);
-                            System.out.println("Phrase is being sent to client: " + newName);
-                            threads[numUsers] = new UserThread(newSocket, numUsers, newName, in);
+                            //String newName = (String) in.readObject(); //the phrase????
+                            WordInformation w = (WordInformation) in.readObject();
+                            System.out.println(w.toString());
+                            SendMsg(w);
+                            System.out.println("Phrase is being sent to client: " + w.toString());
+                            threads[numUsers] = new UserThread(newSocket, numUsers, w.toString(), in);
                             threads[numUsers].start();
                             System.out.println("Connection " + numUsers + users[numUsers]);
                             numUsers++;
 
                         }
+                    } catch (IOException e) {
+                        System.out.println("io exception receiving wordinfo");
                     } catch (Exception e) {
                         System.out.println("Problem with connection.......terminating");
+                        e.printStackTrace();
                     }
                 }
             }
@@ -149,11 +153,11 @@ public class Server {
         public void run() {
             boolean alive = true;
             while(alive) {
-                String newMsg = null;
+                //String newMsg = null;
                 try {
-                    newMsg = (String) myIS.readObject();
+                    wordInfo = (WordInformation) myIS.readObject();
                     synchronized (this) {
-                        Server.this.SendMsg(newMsg);
+                        Server.this.SendMsg(wordInfo);
                     }
                 } catch (ClassNotFoundException e) {
                     System.out.println("Error receiving message... shutting down");

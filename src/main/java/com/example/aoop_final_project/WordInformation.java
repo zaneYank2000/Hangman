@@ -1,18 +1,22 @@
 package com.example.aoop_final_project;
 
+import java.awt.desktop.SystemSleepEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class WordInformation {
+public class WordInformation implements Serializable {
 
     // Instance variables
     ArrayList wordArray = new ArrayList(); //used to save word as char array
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
-    String guess, word;
-    private boolean isHost;
+    String guess = "";
+    String word;
+    private boolean isHost = false;
+    boolean letterFound;
 
     public WordInformation(String word) {
         this.word = word;
-        initialiseArrays();
+        initialiseArray();
     }
 
     public boolean isHost() {
@@ -45,6 +49,7 @@ public class WordInformation {
 
     public void setGuess(String guess) {
         this.guess = guess;
+        updateDisplayArray();
     }
 
     public String getWord() {
@@ -55,12 +60,23 @@ public class WordInformation {
         this.word = word;
     }
 
-    private boolean initialiseArrays() {
+    public void setLetterFound(boolean letterFound) {
+        this.letterFound = letterFound;
+    }
+
+    public boolean isLetterFound() {
+        return letterFound;
+    }
+
+    //Make sure the arrays are good
+    private void initialiseArray() {
+        System.out.println(word + " recieved by initialiseArray() with length "+ word.length());
         //Create word array from word
         for(int i = 0; i < word.length(); i++) {
             wordArray.add(word.charAt(i));
-            wordArray.add("_");
+            wordBlank.add("_");
         }
+        System.out.println(wordArray + " length " + wordArray.size());
 
         for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
             if (wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
@@ -68,20 +84,22 @@ public class WordInformation {
             }
         }
         System.out.println(wordBlank.toString()); //TODO: delete after debug
+    }
 
-
-        if(guess.equals("")) {
-            return false;   //no letter guessed
+    private void updateDisplayArray() {
+        if (guess.equals("")) {
+            letterFound = false;   //no letter guessed
         } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
             for(int k = 0; k < wordArray.size(); k++) {
                 if(wordArray.get(k).toString().equals(guess)) {           //if letter is in phrase, show it
                     wordBlank.set(k, guess);
                 }
             }
-
-            return true;
-        } else {                                                          //letter not found in phrase
-            return false;
+            //Letter was in the word
+            letterFound = true;
+        } else {
+            //letter not found in phrase
+            letterFound = false;
         }
     }
 
