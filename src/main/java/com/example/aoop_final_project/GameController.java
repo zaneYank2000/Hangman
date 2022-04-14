@@ -22,6 +22,15 @@ public class GameController
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
     static int lives = 7;
     boolean keepPlaying = true;
+    String myName;
+    String gameWord;
+    String serverName, guess;
+    boolean isHost;
+    WordInformation wordInfo;
+    ObjectOutputStream myOutputStream;
+    ObjectInputStream objectInputStream;
+
+    private static final int PORT = 5001;
 
     //FXML Objects
     @FXML
@@ -66,7 +75,6 @@ public class GameController
         });
     }
      */
-
 
     public void prepareLabel() {
         // Hides the guess filed before ethe game starts
@@ -143,11 +151,10 @@ public class GameController
                 } while (gameWord.equals("".trim()));
             }
         } catch (NullPointerException e) {
-            System.out.println("Im gay");
+            System.out.println("null pointer exception");
         }
 
         //Initialise the label with the word
-        //prepareLabel();
         wordInfo = new WordInformation(gameWord);
         wordInfo.setHost(true);
         isHost = wordInfo.isHost();
@@ -157,6 +164,7 @@ public class GameController
 
         myOutputStream = new ObjectOutputStream(socket.getOutputStream());
         myOutputStream.flush();
+
         // Send client's name to server
         try {
             System.out.println("in game " + wordInfo.toString());
@@ -176,7 +184,7 @@ public class GameController
         System.out.println("Created a new ClientConnection object...");
         c.start();
 
-        //Login shit
+        //Login stuff
         /*
         if(user.trim().equals("") || pass.trim().equals("")) {
             // Error message
@@ -233,7 +241,7 @@ public class GameController
 
     @FXML
     void aboutGame(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Go fuck yourself bitch ass hoe");
+        JOptionPane.showMessageDialog(null, "Just enter a guess till u win or lose");
     }
 
     @FXML
@@ -248,7 +256,7 @@ public class GameController
                 //} while (guess.equals());
             //}
         } catch (NullPointerException e) {
-            System.out.println("Im gay");
+            System.out.println("null pointer exception thrown. Why");
         }
         guessTextField.setText("");
         //System.out.println(wordInfo.getGuess());
@@ -277,7 +285,6 @@ public class GameController
                             .replace(",", ""));
                 }
             }
-
 
             //Send guess to the server
             try {
@@ -311,17 +318,13 @@ public class GameController
         public void run()
         {
             System.out.println("Entered ClientConnection run method...");
-            while (true)
-            {
-                //TODO: fix so it works with new setup
+            while (true) {
                 try {
-
-                    WordInformation w = (WordInformation) inStr.readObject(); //dedded
+                    WordInformation w = (WordInformation) inStr.readObject();
                     System.out.println("w " + wordInfo);
                     wordInfo.setGuess(w.getGuess()); //= w;
                     System.out.println("wordinfo " + wordInfo);
-                    //System.out.println("wordlabel should be " + receivedMessage);
-                    //displayLabel.setText(w.getWordBlank().toString()); //fucking retarted ass label
+                    //displayLabel.setText(w.getWordBlank().toString()); // why does the label NOT change
                     JOptionPane.showMessageDialog(null, wordInfo.getWordBlank());
                     //send to the letter guesser
 
