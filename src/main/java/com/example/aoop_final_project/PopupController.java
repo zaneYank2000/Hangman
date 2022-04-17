@@ -10,10 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Locale;
+import java.util.Scanner;
 
 
 public class PopupController {
+    public static final String SERVER_IP = "localhost";
+    static final int SERVER_PORT = 5001;
 
     @FXML
     private Text errorText;
@@ -27,8 +33,10 @@ public class PopupController {
     }
 
     @FXML
-    void confirmButtonClicked(ActionEvent event) throws IOException {
+    void confirmButtonClicked(ActionEvent event) throws IOException, ClassNotFoundException {
+
         try {
+            //write word to file
             File wordFile = new File("word.txt");
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
@@ -36,6 +44,7 @@ public class PopupController {
             pw.print(word.toUpperCase(Locale.ROOT).trim());
             pw.close(); 
 
+            //if word is empty
             if(!wordTextField.getText().equals("")) {
                 Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -46,10 +55,12 @@ public class PopupController {
             } else {
                 errorText.setText("You can not leave the text field blank");
             }
+
+
+
         } catch (IOException e){
             System.out.println("Error occurred.");
             e.printStackTrace();
         }
     }
 }
-
