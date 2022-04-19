@@ -16,20 +16,31 @@ public class Server {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket ss = new ServerSocket(PORT);
         System.out.println("SERVER is waiting for client connection");
+        ServerSocket ss2 = new ServerSocket(5002);
 
-        Socket socket = ss.accept();
-        System.out.println("CLIENT has been connected");
 
-        //receive message from client
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        while(true) {
+            Socket socket = ss.accept();
+            System.out.println("CLIENT has been connected");
 
-        //get message from client and print to console
-        String word = (String) ois.readObject();
-        System.out.println("Server has received " + word + " form client");
+            //receive message from client
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-        //send word back to client
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        oos.writeObject(word);
+            //get message from client and print to console
+            String word = (String) ois.readObject();
+            System.out.println("Server has received " + word + " form client");
+
+            //send word back to client
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            oos.writeObject(word);
+            System.out.println("Sending the word " + word + " back to client");
+
+            Socket socket2 = ss2.accept();
+            ObjectOutputStream oos2 = new ObjectOutputStream(socket2.getOutputStream());
+            oos2.writeObject(word);
+            System.out.println("Sending " + word + " to client 2");
+        }
+
 
     }
 

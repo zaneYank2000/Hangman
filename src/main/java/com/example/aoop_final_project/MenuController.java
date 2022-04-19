@@ -53,11 +53,17 @@ public class MenuController {
     }
 
     @FXML
-    void joinGameClicked(ActionEvent event) {
+    void joinGameClicked(ActionEvent event) throws IOException {
         //ask user what the id is to join
+        Parent root = FXMLLoader.load(getClass().getResource("guestGame.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Welcome to Hangman!");
+        stage.setScene(scene);
+        stage.show();
+
         //user join game
         //set user as second username and score
-
     }
 
     @FXML

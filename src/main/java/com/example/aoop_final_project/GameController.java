@@ -16,10 +16,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -29,9 +29,10 @@ public class GameController {
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
     int lives = 7;
     boolean keepPlaying = true;
-    String winSound = "src/main/resources/com/example/aoop_final_project/happy_wheels_win.mp3";
-    String loseSound = "src/main/resources/com/example/aoop_final_project/Wilhelm-Scream.mp3";
-    String winImage = "src/main/resources/com/example/aoop_final_project/you_win.png";
+
+    //make socket
+    InetAddress addr = InetAddress.getByName("localhost");
+    Socket socket = new Socket(addr, 5001);
 
     @FXML
     private Line armLeft;
@@ -81,6 +82,9 @@ public class GameController {
     @FXML
     private Label username2;
 
+    public GameController() throws IOException {
+    }
+
     /* TRYING TO ADD REGEX
     @FXML
     public void initialize() {
@@ -93,11 +97,41 @@ public class GameController {
      */
 
 
-    public void initialize() {
+    public void initialize() throws IOException, ClassNotFoundException {
+
         //read phrase from 'word.txt' and save it to an ArrayList
         try {
+            //read from file
             File myObj = new File("word.txt");
             Scanner myReader = new Scanner(myObj);
+
+            //write word to socket
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            Scanner wordScan = new Scanner(myObj);
+            String word = wordScan.nextLine();
+
+
+            for (int i = 0; i < word.length(); i++) {
+                wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
+                wordBlank.add("_");                           //each letter will be '_'
+            }
+
+            for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
+                if (wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
+                    wordBlank.set(j, " ");
+                }
+            }
+
+            displayLabel.setText(wordBlank.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace(",", ""));
+
+            System.out.println("about to send word to server " + word);
+            oos.writeObject(word);
+
+
+            /*
             while (myReader.hasNextLine()) {                      //while file still has word
                 String word = myReader.nextLine();                //extract word
                 for (int i = 0; i < word.length(); i++) {
@@ -116,11 +150,21 @@ public class GameController {
                     System.out.println(wordBlank.toString()); //TODO: delete after debug
                 }
             }
+             */
+
+
+
+            
+
+            //close scanners
             myReader.close();
+            wordScan.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+
     }
 
     @FXML
