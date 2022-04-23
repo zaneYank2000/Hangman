@@ -92,10 +92,10 @@ public class GameController {
      */
 
 
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
         //read phrase from 'word.txt' and save it to an ArrayList
         try {
-            File myObj = new File("word.txt");
+            File myObj = new File("src/main/resources/com/example/aoop_final_project/word.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {                      //while file still has word
                 String word = myReader.nextLine();                //extract word
@@ -115,11 +115,21 @@ public class GameController {
                     System.out.println(wordBlank.toString()); //TODO: delete after debug
                 }
             }
+
+            //Close the reader
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        // Get username from file
+        Scanner scan = new Scanner(new File("src/main/resources/com/example/aoop_final_project/member.txt"));
+        scan.useDelimiter(",");
+
+        // Set the username label
+        String tempusername = scan.next();
+        username1.setText(tempusername);
     }
 
     @FXML

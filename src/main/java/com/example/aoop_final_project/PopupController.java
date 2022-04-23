@@ -17,7 +17,6 @@ public class PopupController {
 
     @FXML
     private Text errorText;
-
     @FXML
     private TextField wordTextField;
 
@@ -29,11 +28,11 @@ public class PopupController {
     @FXML
     void confirmButtonClicked(ActionEvent event) throws IOException {
         try {
-            File wordFile = new File("word.txt");
+            File wordFile = new File("src/main/resources/com/example/aoop_final_project/word.txt");
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();
-            pw.print(word.toUpperCase(Locale.ROOT).trim());
+            pw.write(word.toUpperCase(Locale.ROOT).trim());
             pw.close(); 
 
             if(!wordTextField.getText().equals("")) {
