@@ -11,7 +11,7 @@ import java.io.IOException;
 public class StartApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("newerLogin.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Welcome to Hangman!");
         stage.setScene(scene);
