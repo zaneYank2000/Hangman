@@ -31,6 +31,8 @@ public class guestGameController {
     InetAddress addr = InetAddress.getByName("localhost");
     Socket socket = new Socket(addr, 5002);
 
+    ObjectOutputStream oos1 = new ObjectOutputStream(socket.getOutputStream());
+
     @FXML
     private Line armLeft;
 
@@ -101,6 +103,8 @@ public class guestGameController {
         public void initialize() throws IOException, ClassNotFoundException {
 
             try {
+                //print gameID
+                gameID.setText("gameID: " + addr);
 
                 //read from socket
                 System.out.println("About to read the word!!!!!!");
@@ -173,7 +177,7 @@ public class guestGameController {
         }
 
         @FXML
-        void submitButtonClicked(ActionEvent event) {
+        void submitButtonClicked(ActionEvent event) throws IOException {
             String guess = guessTextField.getText().toUpperCase(Locale.ROOT);
 
             if(guess.isEmpty()) {                                             //no letter guessed
@@ -188,12 +192,17 @@ public class guestGameController {
                                 .replace(",", ""));
                     }
                 }
+                oos1.writeObject(guess);                                      //send correct guess to other player
+                oos1.flush();
+                System.out.println("about to send guess: " + guess);
             } else {                                                          //letter not found in phrase
                 lives--;
                 checkLives(lives);
+                oos1.writeObject(guess);                                      //send incorrect guess to other player
+                System.out.println("about to send guess: " + guess);
             }
 
-            if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
+            if(wordArray.toString().equals(wordBlank.toString())) {           //if full phrase is guessed, player wins
                 System.out.println("GAME WON");
                 youWinImage1.setVisible(true);
             }

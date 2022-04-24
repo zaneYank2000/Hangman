@@ -57,7 +57,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="gameID" layoutX="906.0" layoutY="703.0" text="Game ID: " />
+      <Label fx:id="gameID" layoutX="820.0" layoutY="703.0" text="Game ID: " />
       <HBox alignment="CENTER" layoutX="105.0" layoutY="468.0" prefHeight="100.0" prefWidth="697.0" spacing="20.0">
          <children>
             <Label text="Enter Letter: ">

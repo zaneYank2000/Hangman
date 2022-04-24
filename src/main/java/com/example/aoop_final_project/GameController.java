@@ -8,18 +8,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -33,6 +31,12 @@ public class GameController {
     //make socket
     InetAddress addr = InetAddress.getByName("localhost");
     Socket socket = new Socket(addr, 5001);
+    ObjectOutputStream oos;
+    ObjectInputStream ois;
+
+
+
+
 
     @FXML
     private Line armLeft;
@@ -82,31 +86,30 @@ public class GameController {
     @FXML
     private Label username2;
 
+
     public GameController() throws IOException {
-    }
 
-    /* TRYING TO ADD REGEX
-    @FXML
-    public void initialize() {
-        guessTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^[A-Za-z]$")) {
-                guessTextField.setText(newValue.replaceAll("[^[A-Za-z]$]", ""));
-            }
-        });
-    }
-     */
 
+        oos = new ObjectOutputStream(socket.getOutputStream());
+        System.out.println("OUTPUT STREAM");
+
+
+    }
 
     public void initialize() throws IOException, ClassNotFoundException {
-
         //read phrase from 'word.txt' and save it to an ArrayList
+        System.out.println("IN INIT METHOD");
         try {
+
+            //print gameID
+            //gameID.setText("gameID: " + addr);
+
             //read from file
             File myObj = new File("word.txt");
             Scanner myReader = new Scanner(myObj);
 
             //write word to socket
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+
             Scanner wordScan = new Scanner(myObj);
             String word = wordScan.nextLine();
 
@@ -153,9 +156,6 @@ public class GameController {
              */
 
 
-
-            
-
             //close scanners
             myReader.close();
             wordScan.close();
@@ -167,6 +167,10 @@ public class GameController {
 
     }
 
+
+
+
+
     @FXML
     void exitButtonClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
@@ -177,8 +181,10 @@ public class GameController {
         stage.show();
     }
 
+
     @FXML
-    void submitButtonClicked(ActionEvent event) {
+    void submitButtonClicked(ActionEvent event) throws IOException {
+            /*
         String guess = guessTextField.getText().toUpperCase(Locale.ROOT);
 
         if(guess.isEmpty()) {                                             //no letter guessed
@@ -204,6 +210,7 @@ public class GameController {
         }
 
         guessTextField.clear();
+             */
     }
     
     private void checkLives(int lives) {
@@ -215,6 +222,44 @@ public class GameController {
             case 2: legLeft.setVisible(true); break;
             case 1: legRight.setVisible(true); gameOverImage.setVisible(true);; break;
         }
+    }
+
+    @FXML
+    public void updateButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+        ois = new ObjectInputStream(socket.getInputStream());
+        String guess = (String) ois.readObject();
+        System.out.println("ABOUT TO GO IN IF: " + guess);
+//        if(guess.length() > 1) {
+//            guess = (String) ois.readObject();
+//        }
+        guess = (String)ois.readObject();
+
+        System.out.println(guess + " GIVEN FROM SERVER");
+
+        if(guess.isEmpty()) {                                             //no letter guessed
+            guessTextField.setPromptText("Please insert letter");
+        } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
+            for(int k = 0; k < wordArray.size(); k++) {
+                if(wordArray.get(k).toString().equals(guess)) {           //if letter is in phrase, show it
+                    wordBlank.set(k, guess);
+                    displayLabel.setText(wordBlank.toString()
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace(",", ""));
+                }
+            }
+        } else {                                                          //letter not found in phrase
+            lives--;
+            checkLives(lives);
+        }
+
+        if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
+            System.out.println("GAME WON");
+            youWinImage1.setVisible(true);
+        }
+
+
+        guessTextField.clear();
     }
 
 
