@@ -16,7 +16,7 @@
             <children>
                 <AnchorPane prefHeight="48.0" prefWidth="310.0" style="-fx-background-color: #2e354f;">
                     <children>
-                        <Label layoutX="103.0" layoutY="8.0" text="Hangman" textFill="#8c90b3">
+                        <Label layoutX="103.0" layoutY="8.0" text="Hangman" textFill="#8d91b2">
                             <font>
                                 <Font name="Comic Sans MS" size="23.0" />
                             </font>
