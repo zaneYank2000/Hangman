@@ -9,17 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class GameController {
@@ -33,9 +30,6 @@ public class GameController {
     Socket socket = new Socket(addr, 5001);
     ObjectOutputStream oos;
     ObjectInputStream ois;
-
-
-
 
 
     @FXML
@@ -102,7 +96,7 @@ public class GameController {
         try {
 
             //print gameID
-            //gameID.setText("gameID: " + addr);
+            gameID.setText("gameID: " + addr);
 
             //read from file
             File myObj = new File("word.txt");
@@ -226,13 +220,15 @@ public class GameController {
 
     @FXML
     public void updateButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        ois = new ObjectInputStream(socket.getInputStream());
+        if(ois == null) {
+            ois = new ObjectInputStream(socket.getInputStream());
+        }
         String guess = (String) ois.readObject();
         System.out.println("ABOUT TO GO IN IF: " + guess);
-//        if(guess.length() > 1) {
-//            guess = (String) ois.readObject();
-//        }
-        guess = (String)ois.readObject();
+        if(guess.length() > 1) {
+           guess = (String) ois.readObject();
+        }
+        //guess = (String) ois.readObject();
 
         System.out.println(guess + " GIVEN FROM SERVER");
 
