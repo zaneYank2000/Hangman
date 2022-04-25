@@ -1,29 +1,38 @@
 package com.example.aoop_final_project;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameController {
+
     ArrayList wordArray = new ArrayList(); //used to save word as char array
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
     int lives = 7;
     boolean keepPlaying = true;
+    Timeline timeline;
 
     //make socket
     InetAddress addr = InetAddress.getByName("localhost");
@@ -69,6 +78,9 @@ public class GameController {
     private Label lettersUsedLabel;
 
     @FXML
+    private Button update;
+
+    @FXML
     private Label user1Score;
 
     @FXML
@@ -87,6 +99,22 @@ public class GameController {
         oos = new ObjectOutputStream(socket.getOutputStream());
         System.out.println("OUTPUT STREAM");
 
+        if(!keepPlaying) {
+            timeline.stop();
+        }
+        timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
+            try {
+                updateButtonClicked();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+
+        timeline.play();
+
 
     }
 
@@ -98,12 +126,11 @@ public class GameController {
             //print gameID
             gameID.setText("gameID: " + addr);
 
-            //read from file
+            //read from file (used only to get word from popup page to this page)
             File myObj = new File("word.txt");
             Scanner myReader = new Scanner(myObj);
 
             //write word to socket
-
             Scanner wordScan = new Scanner(myObj);
             String word = wordScan.nextLine();
 
@@ -157,6 +184,8 @@ public class GameController {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+
 
 
     }
@@ -214,15 +243,16 @@ public class GameController {
             case 4: armLeft.setVisible(true); break;
             case 3: armRight.setVisible(true); break;
             case 2: legLeft.setVisible(true); break;
-            case 1: legRight.setVisible(true); gameOverImage.setVisible(true);; break;
+            case 1: legRight.setVisible(true); gameOverImage.setVisible(true); keepPlaying = false; break;
         }
     }
 
     @FXML
-    public void updateButtonClicked(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void updateButtonClicked() throws IOException, ClassNotFoundException {
         if(ois == null) {
-            ois = new ObjectInputStream(socket.getInputStream());
+                ois = new ObjectInputStream(socket.getInputStream());
         }
+
         String guess = (String) ois.readObject();
         System.out.println("ABOUT TO GO IN IF: " + guess);
         if(guess.length() > 1) {
@@ -252,11 +282,15 @@ public class GameController {
         if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
             System.out.println("GAME WON");
             youWinImage1.setVisible(true);
+            keepPlaying = false;
         }
 
-
         guessTextField.clear();
+
+
     }
+
+
 
 
     /*
