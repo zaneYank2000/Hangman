@@ -31,7 +31,7 @@
       <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="207.0" text="Password  " GridPane.rowIndex="2" />
       <PasswordField fx:id="passwordPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="usernameTextField" prefHeight="25.0" prefWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button fx:id="signUpButton" mnemonicParsing="false" text="Sign Up" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUpButtonClicked" text="Sign Up" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Text fx:id="errorText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>
 </GridPane>
