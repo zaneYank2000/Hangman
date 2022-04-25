@@ -30,6 +30,7 @@ public class MenuController {
     @FXML
     void aboutHangmanClicked(ActionEvent event) {
         //Show user rules and such about hangman
+        //lol
     }
 
     @FXML
