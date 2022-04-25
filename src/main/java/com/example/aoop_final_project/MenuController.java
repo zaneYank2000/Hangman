@@ -1,4 +1,6 @@
 package com.example.aoop_final_project;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -53,11 +56,17 @@ public class MenuController {
     }
 
     @FXML
-    void joinGameClicked(ActionEvent event) {
+    void joinGameClicked(ActionEvent event) throws IOException {
         //ask user what the id is to join
+        Parent root = FXMLLoader.load(getClass().getResource("guestGame.fxml"));
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Welcome to Hangman!");
+        stage.setScene(scene);
+        stage.show();
+
         //user join game
         //set user as second username and score
-
     }
 
     @FXML
