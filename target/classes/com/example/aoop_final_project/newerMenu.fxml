@@ -7,51 +7,34 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0"
-          prefWidth="310.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/17"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.MenuController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="310.0" style="-fx-background-color: #2c344b;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aoop_final_project.MenuController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="39.0" valignment="CENTER" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="39.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="152.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <Label alignment="CENTER" prefHeight="91.0" prefWidth="314.0" text="Hangman" textAlignment="CENTER"
-           textFill="#8d91b2">
+    <Label alignment="CENTER" prefHeight="91.0" prefWidth="314.0" text="Hangman" textAlignment="CENTER" textFill="#8d91b2">
         <font>
-            <Font name="Comic Sans MS" size="24.0"/>
+            <Font name="Bell MT" size="50.0" />
         </font>
     </Label>
-    <Button fx:id="hostGameButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hostGameClicked"
-            prefHeight="53.0" prefWidth="310.0" style="-fx-background-color: #43bb73;" text="Host Game" textFill="WHITE"
-            GridPane.halignment="CENTER" GridPane.rowIndex="1">
+    <Button fx:id="hostGameButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hostGameClicked" prefHeight="53.0" prefWidth="310.0" style="-fx-background-color: #43bb73;" text="Host Game" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
         <font>
-            <Font size="17.0"/>
+            <Font size="17.0" />
         </font>
     </Button>
-    <Button fx:id="joinGameButton" mnemonicParsing="false" onAction="#joinGameClicked" prefHeight="53.0"
-            prefWidth="310.0" style="-fx-background-color: #43bb73;" text="Join Game" textFill="WHITE"
-            GridPane.halignment="CENTER" GridPane.rowIndex="2">
+    <Button fx:id="joinGameButton" mnemonicParsing="false" onAction="#joinGameClicked" prefHeight="53.0" prefWidth="310.0" style="-fx-background-color: #43bb73;" text="Join Game" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
         <font>
-            <Font size="17.0"/>
+            <Font size="17.0" />
         </font>
     </Button>
-    <Button fx:id="helpButton" mnemonicParsing="false" onAction="#aboutHangmanClicked" prefHeight="53.0"
-            prefWidth="310.0" style="-fx-background-color: #1e90ff;" text="About Hangman" textFill="WHITE"
-            GridPane.halignment="CENTER" GridPane.rowIndex="3">
+    <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOutClicked" prefHeight="53.0" prefWidth="310.0" style="-fx-background-color: #FF0000;" text="Log Out" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
         <font>
-            <Font size="17.0"/>
-        </font>
-    </Button>
-    <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOutClicked" prefHeight="53.0" prefWidth="310.0"
-            style="-fx-background-color: #FF0000;" text="Log Out" textFill="WHITE" GridPane.halignment="CENTER"
-            GridPane.rowIndex="4">
-        <font>
-            <Font size="17.0"/>
+            <Font size="17.0" />
         </font>
     </Button>
 </GridPane>
