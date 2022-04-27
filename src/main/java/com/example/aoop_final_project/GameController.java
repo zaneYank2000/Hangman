@@ -137,27 +137,6 @@ public class GameController
             System.out.println("about to send word to server " + word);
             oos.writeObject(word);
 
-            /*
-            while (myReader.hasNextLine()) {                      //while file still has word
-                String word = myReader.nextLine();                //extract word
-                for (int i = 0; i < word.length(); i++) {
-                    wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
-                    wordBlank.add("_");                           //each letter will be '_'
-                }
-                System.out.println(wordArray.toString()); //TODO: delete after debug
-                for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
-                    if(wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
-                        wordBlank.set(j, " ");
-                    }
-                    displayLabel.setText(wordBlank.toString()
-                            .replace("[", "")
-                            .replace("]", "")
-                            .replace(",", ""));
-                    System.out.println(wordBlank.toString()); //TODO: delete after debug
-                }
-            }
-             */
-
             //close scanners
             myReader.close();
             wordScan.close();
@@ -181,33 +160,7 @@ public class GameController
 
     @FXML
     void submitButtonClicked(ActionEvent event) throws IOException {
-            /*
-        String guess = guessTextField.getText().toUpperCase(Locale.ROOT);
 
-        if(guess.isEmpty()) {                                             //no letter guessed
-            guessTextField.setPromptText("Please insert letter");
-        } else if (wordArray.toString().contains(guess)) {                //letter(s) found in phrase
-            for(int k = 0; k < wordArray.size(); k++) {
-                if(wordArray.get(k).toString().equals(guess)) {           //if letter is in phrase, show it
-                    wordBlank.set(k, guess);
-                    displayLabel.setText(wordBlank.toString()
-                            .replace("[", "")
-                            .replace("]", "")
-                            .replace(",", ""));
-                }
-            }
-        } else {                                                          //letter not found in phrase
-            lives--;
-            checkLives(lives);
-        }
-
-        if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
-            System.out.println("GAME WON");
-            youWinImage1.setVisible(true);
-        }
-
-        guessTextField.clear();
-             */
     }
     
     private void checkLives(int lives) {
@@ -219,7 +172,7 @@ public class GameController
             case 2 -> legLeft.setVisible(true);
             case 1 -> {
                 legRight.setVisible(true);
-                gameOverImage.setVisible(true);
+                youWinImage1.setVisible(true);
                 keepPlaying = false;
             }
         }
@@ -258,8 +211,8 @@ public class GameController
         }
 
         if(wordArray.toString().equals(wordBlank.toString())) {            //if full phrase is guessed, player wins
-            System.out.println("GAME WON");
-            youWinImage1.setVisible(true);
+            System.out.println("You lost, other player guessed word");
+            gameOverImage.setVisible(true);
             keepPlaying = false;
         }
 
