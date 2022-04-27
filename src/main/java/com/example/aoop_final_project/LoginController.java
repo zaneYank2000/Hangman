@@ -21,10 +21,10 @@ public class LoginController
 {
     File memberFile = new File("member.txt");  //stores current user
     File membersFile = new File("members.txt");  //stores all users
-    FileWriter fw = new FileWriter(memberFile);
-    PrintWriter pw = new PrintWriter(fw);
+    FileWriter fw = new FileWriter(memberFile, true);
+    PrintWriter pw = new PrintWriter(fw); // member
     FileWriter fw2 = new FileWriter(membersFile, true);
-    PrintWriter pw2 = new PrintWriter(fw2);
+    PrintWriter pw2 = new PrintWriter(fw2); //members
 
     @FXML
     private Text errorText;
@@ -54,6 +54,12 @@ public class LoginController
                 pass = player.substring(player.indexOf(",") + 1, player.length());
                 System.out.println(player + " " + user + " " + pass);
 
+                if (user.equals("") || pass.equals("")) {
+                    //tell user that username or password is incorrect
+                    errorText.setText("There are no users created yet");
+                    break;
+                }
+
                 // See if user exists and load menu
                 if (user.equals(usernameTextField.getText()) && pass.equals(passwordPasswordField.getText())) {
                     // Save member to file
@@ -70,6 +76,7 @@ public class LoginController
                 } else {
                     //tell user that username or password is incorrect
                     errorText.setText("Username or password is incorrect");
+                    break;
                 }
             }
             //Close the reader

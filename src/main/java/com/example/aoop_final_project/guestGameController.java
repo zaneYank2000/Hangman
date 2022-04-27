@@ -21,6 +21,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class guestGameController
@@ -67,19 +68,18 @@ public class guestGameController
     @FXML
     private Label lettersUsedLabel;
     @FXML
-    private Label user1Score;
-    @FXML
-    private Label user2Score;
-    @FXML
-    private Label username1;
-    @FXML
-    private Label username2;
+    private Label usernameLabel;
 
     //Default const
     public guestGameController() throws IOException {}
 
     public void initialize() throws IOException, ClassNotFoundException {
         try {
+            //change name label
+            Scanner scan = new Scanner(new File("member.txt"));
+            String name = scan.nextLine();
+            usernameLabel.setText("Welcome, " + name.substring(0, name.indexOf(",")));
+
             //print gameID
             gameID.setText("Game ID: " + addr);
 
@@ -142,7 +142,7 @@ public class guestGameController
 
     @FXML
     void exitButtonClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("newerMenu.fxml")));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Main Menu");

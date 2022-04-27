@@ -76,13 +76,7 @@ public class GameController
     @FXML
     private Button update;
     @FXML
-    private Label user1Score;
-    @FXML
-    private Label user2Score;
-    @FXML
-    private Label username1;
-    @FXML
-    private Label username2;
+    private Label usernameLabel;
 
 
     public GameController() throws IOException {
@@ -104,6 +98,11 @@ public class GameController
     }
 
     public void initialize() throws IOException, ClassNotFoundException {
+        //change name label
+        Scanner scan = new Scanner(new File("member.txt"));
+        String name = scan.nextLine();
+        usernameLabel.setText("Welcome, " + name.substring(0, name.indexOf(",")));
+
         //read phrase from 'word.txt' and save it to an ArrayList
         System.out.println("IN INIT METHOD");
         try {
