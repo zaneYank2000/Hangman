@@ -1,26 +1,25 @@
 package com.example.aoop_final_project;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Client {
-    public static final String SERVER_IP = "localhost";
-    static final int SERVER_PORT = 5001;
+import java.io.IOException;
+import java.util.Objects;
 
-    public static void main(String[] args) throws IOException {
-        InetAddress addr = InetAddress.getByName(SERVER_IP);
-        Socket socket = new Socket(addr,SERVER_PORT);
-
-        //output stream
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-
-        //write to output stream
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please input a word: ");
-        String word = scanner.next();
-        oos.writeObject(word);
+public class Client extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load((getClass().getResource("newerLogin.fxml")));
+        Scene scene = new Scene(root);
+        stage.setTitle("Welcome to Hangman!");
+        stage.setScene(scene);
+        stage.show();
     }
 
+    public static void main(String[] args) {
+        launch();
+    }
 }
