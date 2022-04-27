@@ -41,7 +41,7 @@ public class PopupController
 
         try {
             //write word to file
-            File wordFile = new File("src/main/resources/com/example/aoop_final_project/word.txt");
+            File wordFile = new File("word.txt");
             FileWriter fw = new FileWriter(wordFile);
             PrintWriter pw = new PrintWriter(fw);
             String word = wordTextField.getText();

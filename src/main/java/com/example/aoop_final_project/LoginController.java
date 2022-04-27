@@ -19,8 +19,8 @@ import java.util.Scanner;
 
 public class LoginController
 {
-    File memberFile = new File("src/main/resources/com/example/aoop_final_project/member.txt");  //stores current user
-    File membersFile = new File("src/main/resources/com/example/aoop_final_project/members.txt");  //stores all users
+    File memberFile = new File("member.txt");  //stores current user
+    File membersFile = new File("members.txt");  //stores all users
     FileWriter fw = new FileWriter(memberFile);
     PrintWriter pw = new PrintWriter(fw);
     FileWriter fw2 = new FileWriter(membersFile, true);
