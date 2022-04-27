@@ -14,7 +14,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -84,19 +83,13 @@ public class guestGameController
             gameID.setText("Game ID: " + addr);
 
             //read from socket
-            System.out.println("About to read the word!!!");
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            //System.out.println("word from SERVER is : " + ois.readObject());
             String word = (String) ois.readObject();
-
-            System.out.println("DEBUG: Word is " + word);
 
             for (int i = 0; i < word.length(); i++) {
                 wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
                 wordBlank.add("_");                           //each letter will be '_'
             }
-
-            System.out.println("DEBUG: Word is " + word);
 
             for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
                 if (wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
@@ -104,7 +97,6 @@ public class guestGameController
                 }
             }
 
-            System.out.println("DEBUG: Word is " + word);
 
             displayLabel.setText(wordBlank.toString()
                     .replace("[", "")
@@ -112,27 +104,6 @@ public class guestGameController
                     .replace(",", ""));
 
             System.out.println(wordArray.toString());
-
-        /*
-        while (myReader.hasNextLine()) {                      //while file still has word
-            String word = myReader.nextLine();                //extract word
-            for (int i = 0; i < word.length(); i++) {
-                wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
-                wordBlank.add("_");                           //each letter will be '_'
-            }
-            System.out.println(wordArray.toString()); //TODO: delete after debug
-            for(int j = 0; j < wordArray.size(); j++) {       //write '_' for each letter in phrase
-                if(wordArray.get(j).toString().equals(" ")) { //auto reveal space characters
-                    wordBlank.set(j, " ");
-                }
-                displayLabel.setText(wordBlank.toString()
-                        .replace("[", "")
-                        .replace("]", "")
-                        .replace(",", ""));
-                System.out.println(wordBlank.toString()); //TODO: delete after debug
-            }
-        }
-         */
 
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

@@ -19,7 +19,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -94,7 +93,7 @@ public class GameController
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
 
-        timeline.play(); //start?
+        timeline.play();
     }
 
     public void initialize() throws IOException, ClassNotFoundException {
@@ -104,7 +103,6 @@ public class GameController
         usernameLabel.setText("Welcome, " + name.substring(0, name.indexOf(",")));
 
         //read phrase from 'word.txt' and save it to an ArrayList
-        System.out.println("IN INIT METHOD");
         try {
             //print gameID
             gameID.setText("Game ID: " + addr);
@@ -184,7 +182,6 @@ public class GameController
         }
 
         String guess = (String) ois.readObject();
-        System.out.println("ABOUT TO GO IN IF: " + guess);
         if(guess.length() > 1) {
            guess = (String) ois.readObject();
         }
