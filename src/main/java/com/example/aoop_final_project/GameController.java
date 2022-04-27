@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -23,15 +25,21 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class GameController {
 
+public class GameController
+{
+    //Sound files
+    String winSound = "src/main/resources/com/example/aoop_final_project/visuals/happy_wheels_win.mp3";
+    String loseSound = "src/main/resources/com/example/aoop_final_project/visuals/Wilhelm-Scream.mp3";
+    //Arraylists to store word information
     ArrayList wordArray = new ArrayList(); //used to save word as char array
     ArrayList wordBlank = new ArrayList(); //used to save word as char array with each char as '_'
-    int lives = 7;
-    boolean keepPlaying = true;
+    // Remaining lives
+    private int lives = 7;
+    // Indicator to keep playing game
+    private boolean keepPlaying = true;
+    // Loop thing to check for guesses
     Timeline timeline;
 
     //make socket
@@ -40,91 +48,67 @@ public class GameController {
     ObjectOutputStream oos;
     ObjectInputStream ois;
 
-
     @FXML
     private Line armLeft;
-
     @FXML
     private Line armRight;
-
     @FXML
     private Line body;
-
-    @FXML
-    private Label displayLabel;
-
-    @FXML
-    private Label gameID;
-
-    @FXML
-    private ImageView gameOverImage;
-
-    @FXML
-    private ImageView youWinImage1;
-
-    @FXML
-    private TextField guessTextField;
-
     @FXML
     private Circle head;
-
     @FXML
     private Line legLeft;
-
     @FXML
     private Line legRight;
 
     @FXML
+    private Label displayLabel;
+    @FXML
+    private Label gameID;
+    @FXML
+    private ImageView gameOverImage;
+    @FXML
+    private ImageView youWinImage1;
+    @FXML
+    private TextField guessTextField;
+    @FXML
     private Label lettersUsedLabel;
-
     @FXML
     private Button update;
-
     @FXML
     private Label user1Score;
-
     @FXML
     private Label user2Score;
-
     @FXML
     private Label username1;
-
     @FXML
     private Label username2;
 
 
     public GameController() throws IOException {
-
-
+        // Create a new output stream
         oos = new ObjectOutputStream(socket.getOutputStream());
         System.out.println("OUTPUT STREAM");
 
-        if(!keepPlaying) {
-            timeline.stop();
-        }
+        if (!keepPlaying) timeline.stop();
         timeline = new Timeline(new KeyFrame(Duration.millis(3000), e -> {
             try {
                 updateButtonClicked();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
 
-        timeline.play();
-
-
+        timeline.play(); //start?
     }
 
     public void initialize() throws IOException, ClassNotFoundException {
         //read phrase from 'word.txt' and save it to an ArrayList
         System.out.println("IN INIT METHOD");
         try {
-
             //print gameID
-            gameID.setText("gameID: " + addr);
+            gameID.setText("Game ID: " + addr);
 
             //read from file (used only to get word from popup page to this page)
             File myObj = new File("word.txt");
@@ -133,7 +117,6 @@ public class GameController {
             //write word to socket
             Scanner wordScan = new Scanner(myObj);
             String word = wordScan.nextLine();
-
 
             for (int i = 0; i < word.length(); i++) {
                 wordArray.add(word.charAt(i));                //save word as ArrayList of individual chars
@@ -153,7 +136,6 @@ public class GameController {
 
             System.out.println("about to send word to server " + word);
             oos.writeObject(word);
-
 
             /*
             while (myReader.hasNextLine()) {                      //while file still has word
@@ -176,7 +158,6 @@ public class GameController {
             }
              */
 
-
             //close scanners
             myReader.close();
             wordScan.close();
@@ -185,18 +166,11 @@ public class GameController {
             e.printStackTrace();
         }
 
-
-
-
     }
-
-
-
-
 
     @FXML
     void exitButtonClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("newerMenu.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Main Menu");
@@ -238,18 +212,22 @@ public class GameController {
     
     private void checkLives(int lives) {
         switch (lives) {
-            case 6: head.setVisible(true); break;
-            case 5: body.setVisible(true); break;
-            case 4: armLeft.setVisible(true); break;
-            case 3: armRight.setVisible(true); break;
-            case 2: legLeft.setVisible(true); break;
-            case 1: legRight.setVisible(true); gameOverImage.setVisible(true); keepPlaying = false; break;
+            case 6 -> head.setVisible(true);
+            case 5 -> body.setVisible(true);
+            case 4 -> armLeft.setVisible(true);
+            case 3 -> armRight.setVisible(true);
+            case 2 -> legLeft.setVisible(true);
+            case 1 -> {
+                legRight.setVisible(true);
+                gameOverImage.setVisible(true);
+                keepPlaying = false;
+            }
         }
     }
 
     @FXML
     public void updateButtonClicked() throws IOException, ClassNotFoundException {
-        if(ois == null) {
+        if (ois == null) {
                 ois = new ObjectInputStream(socket.getInputStream());
         }
 
@@ -286,14 +264,9 @@ public class GameController {
         }
 
         guessTextField.clear();
-
-
     }
 
-
-
-
-    /*
+    // Indicate a loss to the user
     private void lose() {
         gameOverImage.setVisible(true);
         Media sound = new Media(loseSound);
@@ -301,7 +274,7 @@ public class GameController {
         mediaPlayer.play();
     }
 
-
+    // Indicate a win to the loser
     private void win() {
         youWinImage1.setVisible(true);
         Media sound = new Media(winSound);
@@ -309,5 +282,4 @@ public class GameController {
         mediaPlayer.play();
     }
 
-     */
 }
